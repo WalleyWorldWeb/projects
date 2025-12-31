@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title if title else 'Necraphonic' }} - Official</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    {# Add plugins via CDN if needed, e.g., typography #}
+    {#
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script> #}
+
+
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" sizes="any">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml">
+
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+
+    {% block head_extra %}{% endblock %}
+
+</head> {
+# Body classes are now applied via styles.css (e.g., using @apply or direct CSS) #
+}
+
+<body> {
+    % include 'partials/_header.html' %
+    }
+
+    <main id="main-content" class="flex-grow w-full"> {
+        % block content %
+        }
+
+        {
+        % endblock %
+        }
+
+    </main> {
+    % include 'partials/_footer.html' %
+    }
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script> {
+    % block scripts %
+    }
+
+    {
+    % endblock %
+    }
+
+</body>
+
+</html>

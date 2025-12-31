@@ -1,0 +1,222 @@
+/* necraphonic_app/static/css/styles.css */
+
+/* Define custom properties for colors for easier use in CSS */
+:root {
+  --neon-lime: #39FF14;
+  --neon-pink: #FF10F0;
+  --neon-blue: #00FFFF;
+  --metal-grey: #4a4a4a;
+  --dark-leather: #1a1a1a;
+  --off-white: #e5e7eb; /* Example: Tailwind gray-200 */
+  --dark-grey: #374151; /* Example: Tailwind gray-700 */
+}
+
+/* Apply base styles using Tailwind directives (requires Tailwind processing) */
+/* Or define base styles manually if not using Tailwind build process */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Base Styles --- */
+body {
+  @apply bg-dark-leather text-gray-300 font-sans flex flex-col min-h-screen antialiased;
+  /* Add a subtle background texture/noise */
+  /* background-image: url('../img/noise.png'); */ /* Uncomment if you have a noise texture */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply tracking-wider uppercase;
+}
+
+a {
+  @apply transition-colors duration-200 ease-in-out;
+}
+
+/* --- Custom Components & Utilities --- */
+
+/* Glitch Animation Keyframes */
+@keyframes glitch {
+  0%, 100% { transform: skewX(0deg); opacity: 1; }
+  25% { transform: skewX(3deg) translateX(3px); opacity: 0.8; }
+  50% { transform: skewX(-3deg) translateX(-3px); opacity: 1; }
+  75% { transform: skewX(1deg) translateX(1px); opacity: 0.9; }
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* Glitch Effect Classes */
+.glitch-effect {
+  animation: glitch 0.6s linear infinite alternate;
+}
+.hover-glitch:hover {
+  animation: glitch 0.4s linear infinite alternate;
+}
+
+/* Neon Glow Effects (Example for Pink) */
+.neon-glow-pink {
+  text-shadow: 0 0 5px var(--neon-pink),
+               0 0 10px var(--neon-pink),
+               0 0 15px rgba(255, 16, 240, 0.7); /* Softer outer glow */
+}
+.neon-glow-lime {
+   text-shadow: 0 0 5px var(--neon-lime),
+                0 0 10px var(--neon-lime),
+                0 0 15px rgba(57, 255, 20, 0.7);
+}
+.neon-glow-blue {
+   text-shadow: 0 0 5px var(--neon-blue),
+                0 0 10px var(--neon-blue),
+                0 0 15px rgba(0, 255, 255, 0.7);
+}
+
+/* Button Styles */
+.btn {
+  @apply inline-block uppercase text-sm font-bold tracking-widest py-2 px-6 rounded-sm border transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black;
+}
+.btn-primary {
+  @apply bg-neon-pink text-black border-neon-pink hover:bg-white hover:text-black hover:shadow-lg focus:ring-neon-pink;
+}
+.btn-secondary {
+  @apply bg-transparent border-neon-lime text-neon-lime hover:bg-neon-lime hover:text-black focus:ring-neon-lime;
+}
+.btn-primary:hover, .btn-secondary:hover {
+  /* Add subtle lift or pulse */
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Header/Nav Specific Styles */
+#site-header {
+  /* Potential texture */
+  /* background-image: url('../img/metal_texture.jpg'); */
+}
+#logo-link {
+  /* Apply neon glow on hover */
+}
+#logo-link:hover {
+   text-shadow: 0 0 8px var(--neon-pink), 0 0 15px var(--neon-pink);
+}
+
+.nav-link {
+  position: relative; /* Needed for pseudo-element */
+  overflow: hidden;
+}
+/* Underline effect on hover */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--neon-lime);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+/* Active link style (already handled by Tailwind classes in HTML) */
+/* .nav-link.active { @apply text-neon-lime font-semibold; } */
+
+/* Form Input Styling */
+.form-input-metal {
+  @apply block w-full rounded-sm border-metal-grey bg-dark-leather/50 shadow-sm py-2 px-3 text-white focus:border-neon-pink focus:ring focus:ring-neon-pink focus:ring-opacity-50 transition duration-200 ease-in-out;
+  border-width: 1px; /* Ensure border is visible */
+}
+.form-input-metal:focus {
+   box-shadow: 0 0 10px rgba(255, 16, 240, 0.5); /* Neon glow on focus */
+}
+
+/* Show Card Styling */
+.show-card {
+  @apply bg-black/60 border border-metal-grey/70 rounded-sm shadow-lg overflow-hidden flex flex-col sm:flex-row items-stretch transition-all duration-300 ease-in-out;
+  backdrop-filter: blur(2px); /* Subtle blur for depth */
+}
+.show-card:hover {
+  @apply border-neon-pink shadow-xl;
+  transform: translateY(-5px) scale(1.02); /* Lift effect */
+  z-index: 10; /* Bring to front */
+  position: relative; /* Needed for z-index */
+}
+.show-card .date-section {
+  @apply bg-metal-grey/30 border-b sm:border-b-0 sm:border-r border-metal-grey/70 transition-colors duration-300;
+}
+.show-card:hover .date-section {
+   @apply bg-neon-pink/20 border-neon-pink/50;
+}
+.show-card .ticket-link-button {
+   /* Use btn styles */
+   @apply btn btn-primary py-1 px-3 text-xs; /* Adjust padding/size */
+}
+
+/* Music Page Track Item */
+.track-item {
+   transition: all 0.2s ease-in-out;
+   border: 1px solid transparent;
+}
+.track-item:hover {
+   @apply bg-metal-grey/60 border-metal-grey;
+   transform: translateX(5px);
+}
+.track-item.active { /* Add this class via JS */
+   @apply bg-neon-blue/20 border-neon-blue text-white;
+}
+.track-item.active span {
+    @apply text-white; /* Ensure text stays white */
+}
+.track-item.active .font-semibold {
+    @apply text-neon-blue; /* Highlight title */
+}
+
+
+/* --- Scroll Animation Placeholders --- */
+/* Elements hidden initially */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+/* Elements become visible when 'visible' class is added by JS */
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Add more specific styles for sections, backgrounds, etc. */
+#landing-hero #hero-background {
+  /* Consider a more complex animated gradient or noise */
+   background: linear-gradient(-45deg, #000000, var(--dark-leather), var(--metal-grey), #000000);
+   background-size: 400% 400%;
+   animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
+
+#explore .block-link {
+    transition: all 0.3s ease-in-out;
+}
+#explore .block-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Add a subtle overlay to the whole page */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 100;
+} 
+

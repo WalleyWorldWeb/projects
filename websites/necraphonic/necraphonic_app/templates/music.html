@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div id="music-essay-page" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+
+    <header class="text-center mb-12 md:mb-16">
+        <h1 class="text-4xl md:text-5xl font-black uppercase text-neon-blue tracking-tight mb-2">Sonic & Visual Essays</h1>
+        <p class="text-lg text-gray-400 max-w-3xl mx-auto">Explore the layers behind the sound and vision. Select a transmission below.</p>
+    </header>
+
+    <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+
+        {# --- Track/Video Selection List --- #}
+        <aside id="track-list-container" class="lg:w-1/3 xl:w-1/4 flex-shrink-0">
+            <h2 class="text-lg uppercase font-semibold text-gray-500 border-b border-metal-grey pb-2 mb-4 tracking-widest">Transmissions</h2>
+            <ul id="track-list" class="space-y-2">
+                {# Example List Item - Loop through tracks/videos from Flask context #}
+                {# Add 'active' class styling for the selected item via JS #}
+                <li>
+                    <button data-track-id="track1" class="track-item w-full text-left p-3 rounded-sm bg-black/20 hover:bg-metal-grey/40 focus:outline-none focus:ring-2 focus:ring-neon-blue transition-all duration-200 group">
+                        <span class="block font-semibold text-white group-hover:text-neon-blue">Track Title One</span>
+                        <span class="block text-xs text-gray-400">Album Name (Year)</span>
+                    </button>
+                </li>
+                <li>
+                    <button data-track-id="video1" class="track-item w-full text-left p-3 rounded-sm bg-black/20 hover:bg-metal-grey/40 focus:outline-none focus:ring-2 focus:ring-neon-blue transition-all duration-200 group">
+                        <span class="block font-semibold text-white group-hover:text-neon-blue">Video Title Alpha [Video]</span>
+                        <span class="block text-xs text-gray-400">Visual Album X</span>
+                    </button>
+                </li>
+                {# --- Add more list items dynamically --- #}
+                 <li>
+                    <button data-track-id="track2" class="track-item w-full text-left p-3 rounded-sm bg-black/20 hover:bg-metal-grey/40 focus:outline-none focus:ring-2 focus:ring-neon-blue transition-all duration-200 group">
+                        <span class="block font-semibold text-white group-hover:text-neon-blue">Another Track Example</span>
+                        <span class="block text-xs text-gray-400">Single</span>
+                    </button>
+                </li>
+            </ul>
+        </aside>
+
+        {# --- Main Content Area (Media Player + Essay) --- #}
+        <section id="media-essay-content" class="flex-grow lg:w-2/3 xl:w-3/4">
+            {# Placeholder for Media Player (Audio or Video) #}
+            <div id="media-player-zone" class="mb-8 bg-black border border-metal-grey/50 rounded-sm aspect-video flex items-center justify-center text-gray-600">
+                <p>Media Player Placeholder (e.g., Plyr.io, Video.js)</p>
+                </div>
+
+            {# Dynamic Essay Content Area #}
+            <article id="essay-content" class="prose prose-invert prose-sm sm:prose-base max-w-none prose-headings:uppercase prose-headings:tracking-wider prose-headings:text-neon-pink prose-a:text-neon-blue hover:prose-a:text-neon-lime prose-strong:text-white">
+                {# Content will be loaded here via JavaScript based on track selection #}
+                <h3 id="essay-title">Select a Transmission</h3>
+                <p id="essay-body">
+                    Details, lyrics, concepts, and member insights related to the selected track or video will appear here. Rhythmic static pulses through the circuits, awaiting your command...
+                </p>
+                {# Example structure for loaded content: #}
+                {#
+                <h3>Concept: Decay & Rebirth</h3>
+                <p>This track explores the cyclical nature of destruction...</p>
+                <figure>
+                    <img src="..." alt="...">
+                    <figcaption>Artwork detail</figcaption>
+                </figure>
+                <h4>Member Focus: [Name]</h4>
+                <p>The synth lines here were crafted by [Name], reflecting...</p>
+                #}
+            </article>
+        </section>
+
+    </div> {# End Flex Container #}
+</div> {# End Container #}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }} {# Include scripts from layout if needed #}
+{# Link to JS file for handling track selection and content loading #}
+<script src="{{ url_for('static', filename='js/music_player.js') }}"></script>
+{# Link to media player library JS if needed #}
+{# <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script> #}
+{# <script> const player = new Plyr('#player'); </script> #}
+{% endblock %}
+
+{% block head_extra %}
+{# Link to media player library CSS if needed #}
+{# <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" /> #}
+{# Add Tailwind Typography plugin if not included globally #}
+<script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+{% endblock %}

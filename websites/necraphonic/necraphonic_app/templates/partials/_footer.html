@@ -1,0 +1,13 @@
+{# templates/partials/_footer.html #}
+<footer id="site-footer" class="mt-auto bg-black border-t border-metal-grey/50 py-6">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="copyright-text text-xs text-gray-500 uppercase tracking-wider">
+            &copy; <span id="current-year">2025</span> Necraphonic | Walley Web World
+            {# Use JS to update year or pass 'current_year' from Flask context processor #}
+        </p>
+        <script>
+            // Simple JS to update year (can also be done server-side)
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        </script>
+    </div>
+</footer>

@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{# --- Hero Section - Full Height --- #}
+<section id="landing-hero" class="relative flex items-center justify-center h-screen min-h-[600px] overflow-hidden text-center bg-black">
+    <div id="hero-background" class="absolute inset-0 z-0 opacity-40">
+        <div class="absolute inset-0 bg-gradient-to-br from-black via-metal-grey/30 to-black animate-pulse-slow"></div>
+        </div>
+
+    <div class="relative z-10 p-8 flex flex-col items-center">
+        <h1 id="main-title" class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase text-white mb-4 tracking-tighter animate-glitch" style="text-shadow: 0 0 10px rgba(255, 16, 240, 0.7), 0 0 20px rgba(255, 16, 240, 0.5);">
+            NECRAPHONIC
+        </h1>
+        <p id="tagline" class="text-lg sm:text-xl text-neon-lime uppercase tracking-widest mb-8 animate__animated animate__fadeInUp animate__delay-1s">
+            Industrial Pulse // Cathartic Beat
+        </p>
+        <a href="#explore" id="enter-button"
+           class="inline-block bg-transparent border-2 border-neon-lime text-neon-lime uppercase text-sm font-bold tracking-widest py-3 px-8 rounded-sm hover:bg-neon-lime hover:text-black hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-neon-lime animate__animated animate__pulse animate__infinite animate__slow">
+            Explore Transmission
+        </a>
+    </div>
+
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
+        <svg class="w-6 h-6 text-gray-500 animate-bounce" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+    </div>
+</section>
+
+{# --- Subsequent Content Sections (Example) --- #}
+<section id="explore" class="py-16 sm:py-24 bg-dark-leather">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold uppercase text-neon-pink mb-8 tracking-wide">The Signal</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto mb-12">
+            Dive into the sonic architecture. Experience the fusion of relentless industrial rhythms and ecstatic dance energy. Necraphonic is the frequency of the future underground.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <a href="{{ url_for('music.music_home') }}" class="block-link group bg-black/30 p-8 border border-metal-grey hover:border-neon-blue transition-all duration-300 rounded-sm shadow-lg">
+                <h3 class="text-xl font-semibold uppercase text-neon-blue mb-3 group-hover:animate-pulse">Listen</h3>
+                <p class="text-sm text-gray-500 group-hover:text-gray-300">Explore the discography and visual essays.</p>
+            </a>
+            <a href="{{ url_for('shows.list_shows') }}" class="block-link group bg-black/30 p-8 border border-metal-grey hover:border-neon-lime transition-all duration-300 rounded-sm shadow-lg">
+                <h3 class="text-xl font-semibold uppercase text-neon-lime mb-3 group-hover:animate-pulse">Witness</h3>
+                <p class="text-sm text-gray-500 group-hover:text-gray-300">Find upcoming live transmissions and rituals.</p>
+            </a>
+            <a href="{{ url_for('main.contact') }}" class="block-link group bg-black/30 p-8 border border-metal-grey hover:border-neon-pink transition-all duration-300 rounded-sm shadow-lg">
+                <h3 class="text-xl font-semibold uppercase text-neon-pink mb-3 group-hover:animate-pulse">Connect</h3>
+                <p class="text-sm text-gray-500 group-hover:text-gray-300">Interface with the collective.</p>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block head_extra %}
+{# Add animation library CSS if needed, e.g., Animate.css #}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+{% endblock %}

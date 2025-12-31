@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div id="contact-page" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+
+    <header class="text-center mb-12 md:mb-16">
+        <h1 class="text-4xl md:text-5xl font-black uppercase text-neon-pink tracking-tight mb-2">Interface</h1>
+        <p class="text-lg text-gray-400 max-w-3xl mx-auto">Establish connection for booking, press, or general inquiries.</p>
+    </header>
+
+    <div class="max-w-2xl mx-auto bg-black/40 p-8 md:p-10 border border-metal-grey/70 rounded-sm shadow-xl">
+
+        {# Optional: Display Flash Messages (e.g., form success/error) #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="mb-6">
+              {% for category, message in messages %}
+                <div class="p-3 rounded-sm text-sm {% if category == 'error' %}bg-red-900/50 text-red-200 border border-red-700{% else %}bg-green-900/50 text-green-200 border border-green-700{% endif %}" role="alert">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        {# --- Contact Form --- #}
+        {# Point 'action' to the Flask route that handles form submission #}
+        <form id="contact-form" action="{{ url_for('main.contact') }}" method="POST" novalidate>
+            {# Include CSRF token if using Flask-WTF #}
+            {# {{ form.csrf_token }} #}
+
+            <div class="grid grid-cols-1 gap-y-6 gap-x-8 sm:grid-cols-2">
+                {# Name Field #}
+                <div>
+                    <label for="name" class="block text-sm font-medium uppercase tracking-wider text-gray-400 mb-1">Name</label>
+                    <input type="text" name="name" id="name" autocomplete="name" required
+                           class="form-input-metal block w-full rounded-sm border-metal-grey/50 bg-dark-leather/50 shadow-sm py-2 px-3 text-white focus:border-neon-pink focus:ring focus:ring-neon-pink focus:ring-opacity-50 transition duration-200">
+                    {# Add field for WTForms errors if using: {{ form.name.errors }} #}
+                </div>
+
+                {# Email Field #}
+                <div>
+                    <label for="email" class="block text-sm font-medium uppercase tracking-wider text-gray-400 mb-1">Email</label>
+                    <input type="email" name="email" id="email" autocomplete="email" required
+                           class="form-input-metal block w-full rounded-sm border-metal-grey/50 bg-dark-leather/50 shadow-sm py-2 px-3 text-white focus:border-neon-pink focus:ring focus:ring-neon-pink focus:ring-opacity-50 transition duration-200">
+                     {# Add field for WTForms errors if using: {{ form.email.errors }} #}
+                </div>
+
+                {# Subject Field (Full Width) #}
+                <div class="sm:col-span-2">
+                    <label for="subject" class="block text-sm font-medium uppercase tracking-wider text-gray-400 mb-1">Subject</label>
+                    <input type="text" name="subject" id="subject" autocomplete="off" required
+                           class="form-input-metal block w-full rounded-sm border-metal-grey/50 bg-dark-leather/50 shadow-sm py-2 px-3 text-white focus:border-neon-pink focus:ring focus:ring-neon-pink focus:ring-opacity-50 transition duration-200">
+                     {# Add field for WTForms errors if using: {{ form.subject.errors }} #}
+                </div>
+
+                {# Message Field (Full Width) #}
+                <div class="sm:col-span-2">
+                    <label for="message" class="block text-sm font-medium uppercase tracking-wider text-gray-400 mb-1">Message</label>
+                    <textarea id="message" name="message" rows="6" required
+                              class="form-input-metal block w-full rounded-sm border-metal-grey/50 bg-dark-leather/50 shadow-sm py-2 px-3 text-white focus:border-neon-pink focus:ring focus:ring-neon-pink focus:ring-opacity-50 transition duration-200"></textarea>
+                     {# Add field for WTForms errors if using: {{ form.message.errors }} #}
+                </div>
+            </div>
+
+            {# Submit Button #}
+            <div class="mt-8 text-right">
+                <button type="submit" id="submit-button"
+                        class="submit-button-rave inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-sm text-black bg-neon-pink uppercase tracking-widest hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-neon-pink transition-all duration-200 hover:shadow-lg hover:animate-pulse">
+                    Send Transmission
+                </button>
+            </div>
+        </form>
+
+        {# --- Alternative Contact Info (Optional) --- #}
+        <div id="alternative-contact" class="mt-10 pt-6 border-t border-metal-grey/50 text-center">
+             <h3 class="text-sm uppercase tracking-wider text-gray-500 mb-3">Direct Channels</h3>
+             <p class="text-sm text-gray-400">Booking: <a href="mailto:booking@necraphonic.example.com" class="text-neon-blue hover:underline">booking@necraphonic.example.com</a></p>
+             <p class="text-sm text-gray-400">Press: <a href="mailto:press@necraphonic.example.com" class="text-neon-blue hover:underline">press@necraphonic.example.com</a></p>
+        </div>
+
+    </div> {# End Form Container #}
+</div> {# End Page Container #}
+{% endblock %}

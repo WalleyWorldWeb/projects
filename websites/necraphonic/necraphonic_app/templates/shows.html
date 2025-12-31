@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div id="shows-page" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+
+    <header class="text-center mb-12 md:mb-16">
+        <h1 class="text-4xl md:text-5xl font-black uppercase text-neon-lime tracking-tight mb-2">Live Transmissions</h1>
+        <p class="text-lg text-gray-400 max-w-3xl mx-auto">Upcoming rituals and documented past events.</p>
+    </header>
+
+    {# --- Upcoming Shows Section --- #}
+    <section id="upcoming-shows" class="mb-16">
+        <h2 class="text-2xl uppercase font-semibold text-gray-400 border-b border-metal-grey pb-3 mb-8 tracking-widest">Upcoming</h2>
+
+        {% if upcoming_shows %}
+            <div id="shows-list-upcoming" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                {# Loop through 'upcoming_shows' passed from Flask context #}
+                {% for show in upcoming_shows %}
+                    {% include 'partials/_show_card.html' %} {# Include the show card partial #}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-12 border border-dashed border-metal-grey/50 rounded-sm">
+                <p class="text-gray-500 italic">No upcoming transmissions scheduled. Awaiting signal...</p>
+            </div>
+        {% endif %}
+    </section>
+
+    {# --- Past Shows Section (Optional) --- #}
+    <section id="past-shows">
+        <h2 class="text-2xl uppercase font-semibold text-gray-400 border-b border-metal-grey pb-3 mb-8 tracking-widest">Archive</h2>
+
+        {% if past_shows %}
+            <div id="shows-list-past" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 opacity-70">
+                 {# Loop through 'past_shows' passed from Flask context #}
+                {% for show in past_shows %}
+                    {% include 'partials/_show_card.html' %} {# Reuse the show card partial #}
+                {% endfor %}
+            </div>
+            {# Optional: Add pagination or 'Load More' button here #}
+        {% else %}
+            <div class="text-center py-12 border border-dashed border-metal-grey/50 rounded-sm">
+                <p class="text-gray-500 italic">No documented past transmissions found in the archive.</p>
+            </div>
+        {% endif %}
+    </section>
+
+</div> {# End Container #}
+{% endblock %}

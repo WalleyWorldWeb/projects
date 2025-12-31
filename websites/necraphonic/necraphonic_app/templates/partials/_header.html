@@ -1,0 +1,31 @@
+{# templates/partials/_header.html #}
+<header id="site-header" class="sticky top-0 z-50 w-full bg-black/80 backdrop-blur-md shadow-lg border-b border-metal-grey/50">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center" aria-label="Main Navigation">
+        <a href="{{ url_for('main.home') }}" id="logo-link" class="text-2xl lg:text-3xl font-bold uppercase tracking-wider text-neon-pink hover:text-white transition-colors duration-300 hover:animate-glitch">
+            NECRAPHONIC
+        </a>
+
+        <ul class="hidden md:flex space-x-6 lg:space-x-8 items-center">
+            <li><a href="{{ url_for('main.home') }}" class="nav-link text-sm uppercase tracking-widest hover:text-neon-lime transition-colors duration-200 {% if request.endpoint == 'main.home' %}text-neon-lime font-semibold{% endif %}">Home</a></li>
+            <li><a href="{{ url_for('music.music_home') }}" class="nav-link text-sm uppercase tracking-widest hover:text-neon-lime transition-colors duration-200 {% if request.endpoint.startswith('music.') %}text-neon-lime font-semibold{% endif %}">Music</a></li>
+            <li><a href="{{ url_for('shows.list_shows') }}" class="nav-link text-sm uppercase tracking-widest hover:text-neon-lime transition-colors duration-200 {% if request.endpoint.startswith('shows.') %}text-neon-lime font-semibold{% endif %}">Shows</a></li>
+            <li><a href="{{ url_for('main.contact') }}" class="nav-link text-sm uppercase tracking-widest hover:text-neon-lime transition-colors duration-200 {% if request.endpoint == 'main.contact' %}text-neon-lime font-semibold{% endif %}">Contact</a></li>
+            </ul>
+
+        <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-neon-pink">
+            <span class="sr-only">Open main menu</span>
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </button>
+    </nav>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-black/95 border-t border-metal-grey/50">
+        <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <li><a href="{{ url_for('main.home') }}" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-metal-grey hover:text-neon-lime {% if request.endpoint == 'main.home' %}text-neon-lime bg-metal-grey{% else %}text-gray-300{% endif %}">Home</a></li>
+            <li><a href="{{ url_for('music.music_home') }}" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-metal-grey hover:text-neon-lime {% if request.endpoint.startswith('music.') %}text-neon-lime bg-metal-grey{% else %}text-gray-300{% endif %}">Music</a></li>
+            <li><a href="{{ url_for('shows.list_shows') }}" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-metal-grey hover:text-neon-lime {% if request.endpoint.startswith('shows.') %}text-neon-lime bg-metal-grey{% else %}text-gray-300{% endif %}">Shows</a></li>
+            <li><a href="{{ url_for('main.contact') }}" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-metal-grey hover:text-neon-lime {% if request.endpoint == 'main.contact' %}text-neon-lime bg-metal-grey{% else %}text-gray-300{% endif %}">Contact</a></li>
+        </ul>
+    </div>
+</header>

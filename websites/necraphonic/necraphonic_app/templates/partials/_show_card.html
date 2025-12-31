@@ -1,0 +1,30 @@
+{# templates/partials/_show_card.html #}
+{# Expects a 'show' object in context when included #}
+<article class="show-card bg-black/50 border border-metal-grey/70 rounded-sm shadow-lg overflow-hidden flex flex-col sm:flex-row items-stretch hover:border-neon-pink transition-colors duration-300">
+    <div class="date-section bg-metal-grey/30 text-center p-4 flex flex-col justify-center items-center sm:w-32 border-b sm:border-b-0 sm:border-r border-metal-grey/70">
+        <span class="block text-sm uppercase text-neon-lime tracking-widest">{{ show.date.strftime('%b') }}</span> {# Month Abbreviation #}
+        <span class="block text-4xl font-bold text-white leading-tight my-1">{{ show.date.strftime('%d') }}</span> {# Day #}
+        <span class="block text-xs text-gray-400">{{ show.date.strftime('%Y') }}</span> {# Year #}
+        <span class="block text-xs text-gray-400 mt-1">{{ show.date.strftime('%a') }}</span> {# Day Abbreviation #}
+    </div>
+
+    <div class="details-section p-4 flex-grow flex flex-col justify-between">
+        <div>
+            <h3 class="venue-name text-lg font-semibold text-white uppercase tracking-wide">{{ show.venue }}</h3>
+            <p class="location text-sm text-gray-400 mb-2">{{ show.city }}{% if show.country %}, {{ show.country }}{% endif %}</p>
+            {% if show.details %}
+            <p class="show-details text-xs text-gray-500 italic mb-3">{{ show.details }}</p>
+            {% endif %}
+        </div>
+        <div class="mt-3 text-right">
+            {% if show.ticket_url %}
+            <a href="{{ show.ticket_url }}" target="_blank" rel="noopener noreferrer"
+               class="ticket-link-button inline-block bg-neon-pink text-black uppercase text-xs font-bold tracking-widest py-2 px-4 rounded-sm hover:bg-white hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-neon-pink">
+                Tickets
+            </a>
+            {% else %}
+            <span class="text-xs text-gray-600 italic uppercase">Info at Venue</span>
+            {% endif %}
+        </div>
+    </div>
+</article>
